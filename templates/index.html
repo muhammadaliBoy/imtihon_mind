@@ -230,6 +230,14 @@
             font-size: 1.5rem;
             margin-left: 20px;
         }
+
+        select.input-box {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/p%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+            padding-right: 40px;
+        }
     </style>
 </head>
 <body>
@@ -252,10 +260,31 @@
     <div class="hero-flex">
         <div class="hero-text">
             <h1>Kreativ <br> IT Ta'lim <br> Platformasi</h1>
-            <p style="margin-top: 20px; opacity: 0.6;">Ism va telefon raqamingizni qoldiring, biz bog'lanamiz.</p>
+            <p style="margin-top: 20px; opacity: 0.6; max-width: 400px;">
+                Barcha ma'lumotlaringizni bitta joyda qoldiring.
+                Muhammadali Sagdiyev loyihasi.
+            </p>
         </div>
-        <div class="form-card h-el">
-            <h2>Salom Sagdiyev Muhammadali</h2>
+
+        <div class="form-card h-el" style="width: 450px; padding: 40px;">
+            <h2 style="margin-bottom: 30px; font-size: 1.6rem; text-align: center; background: linear-gradient(to right, var(--p), var(--s)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Ro'yxatdan o'tish
+            </h2>
+            <form action="{% url 'contact' %}" method="post" id="main-form">
+                {% csrf_token %}
+
+                <input type="text" name="fullname" class="input-box h-el" placeholder="Ism va Familiya" required>
+
+                <input type="tel" name="phone" class="input-box h-el" placeholder="+998 (__) ___-__-__" required>
+
+                <input type="text" name="course_name" class="input-box h-el" placeholder="Qaysi kursga qiziqasiz?"
+                       required>
+
+                <textarea name="message" class="input-box h-el" placeholder="Savollaringiz..."
+                          style="height: 100px; resize: none;"></textarea>
+
+                <button type="submit" class="send-btn h-el">Hoziroq yuborish</button>
+            </form>
         </div>
     </div>
 </section>
@@ -301,6 +330,19 @@
 </section>
 
 <script>
+    // Barcha formalarni ushlab olamiz
+    document.getElementById('main-form').onsubmit = (e) => {
+        e.preventDefault();
+
+        // Formadagi ma'lumotlarni olish (ixtiyoriy, tekshirish uchun)
+        const name = e.target.fullname.value;
+
+        // Effekt uchun alert
+        alert(`Rahmat, ${name}! Ma'lumotlaringiz qabul qilindi. Tez orada aloqaga chiqamiz.`);
+
+        // Formani tozalash
+        e.target.reset();
+    };
     // CURSOR LOGIC
     const c = document.getElementById('c'), f = document.getElementById('f');
     window.onmousemove = (e) => {

@@ -9,3 +9,12 @@ class Jamoa(models.Model):
 class Kurs(models.Model):
     role = models.CharField()
     text = models.CharField()
+
+class Ariza(models.Model):
+    fullname = models.CharField()
+    phone = models.CharField()
+    course_name = models.CharField()
+    message = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.fullname

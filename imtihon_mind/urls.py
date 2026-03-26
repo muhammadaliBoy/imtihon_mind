@@ -19,10 +19,11 @@ from operator import index
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from app.views import IndexView
+from app.views import IndexView, ArizaView
 from imtihon_mind import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
+    path('contact/', ArizaView.as_view(), name='contact'),
 ]
